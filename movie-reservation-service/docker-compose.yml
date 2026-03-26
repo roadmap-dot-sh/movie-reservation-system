@@ -1,0 +1,46 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: movie_reservation_db
+    environment:
+      POSTGRES_DB: movie_reservation
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - movie_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: movie_reservation_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - movie_network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: movie_reservation_mailhog
+    ports:
+      - "1025:1025" # SMTP port
+      - "8025:8025" # Web interface
+    networks:
+      - movie_network
+
+volumes:
+  postgres_data:
+
+networks:
+  movie_network:
+    driver: bridge
