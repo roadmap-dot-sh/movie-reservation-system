@@ -1,6 +1,6 @@
 # Movie Reservation System
 
-Movie Reservation System
+Build a system that allows users to reserve movie tickets.
 
 Project
 URL: <a href="https://roadmap.sh/projects/movie-reservation-system">https://roadmap.sh/projects/movie-reservation-system</a>
